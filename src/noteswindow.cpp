@@ -51,7 +51,6 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     mNotes2File(notes2FullPath)
 {
     ui->setupUi(this);
-
     ui->textEdit->setText(loadText(mNotes2File));
 
     auto textChangedSlot = [&]() {
