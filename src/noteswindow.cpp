@@ -54,6 +54,8 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+
     QSettings settings;
     restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
 
