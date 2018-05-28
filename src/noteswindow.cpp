@@ -2,6 +2,7 @@
 #include "ui_noteswindow.h"
 
 #include <QDir>
+#include <QSettings>
 #include <QTextStream>
 
 namespace {
@@ -53,12 +54,20 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
+    QSettings settings;
+    restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
+
     auto textChangedSlot = [&]() {
         saveText(ui->textEdit->toPlainText(), mNotes2File);
     };
 
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
+}
+
+void NotesWindow::closeEvent(QCloseEvent *event) {
+ QSettings settings;
+ settings.setValue("mainWindowGeometry", saveGeometry());
 }
 
 NotesWindow::~NotesWindow()

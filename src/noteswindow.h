@@ -1,5 +1,4 @@
-#ifndef NOTESWINDOW_H
-#define NOTESWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -14,10 +13,9 @@ class NotesWindow : public QMainWindow
 public:
     explicit NotesWindow(QString const & notes2File);
     ~NotesWindow();
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
 };
-
-#endif // NOTESWINDOW_H

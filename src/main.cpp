@@ -15,7 +15,10 @@ QString findNotes2FullPath() {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    QCoreApplication::setOrganizationDomain("olofbjarnason.se");
+    QCoreApplication::setOrganizationName("Objarni Productions AB");
+    QCoreApplication::setApplicationName("Notes2");
+    QCoreApplication::setApplicationVersion("0.5");
     auto fullPath = findNotes2FullPath();
 
     NotesWindow w(fullPath);
