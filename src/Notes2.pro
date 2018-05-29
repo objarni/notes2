@@ -32,3 +32,5 @@ HEADERS += \
 
 FORMS += \
         noteswindow.ui
+
+RESOURCES += icon/icon.qrc
