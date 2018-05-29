@@ -2,6 +2,7 @@
 #include "ui_noteswindow.h"
 
 #include <QDir>
+#include <QPainter>
 #include <QSettings>
 #include <QTextStream>
 
@@ -70,6 +71,23 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
 void NotesWindow::closeEvent(QCloseEvent *event) {
  QSettings settings;
  settings.setValue("mainWindowGeometry", saveGeometry());
+}
+
+void NotesWindow::paintEvent(QPaintEvent *)
+{
+//    static int i = 0;
+//    qInfo("paint %d", i++);
+    QPainter painter(this);
+    painter.setPen(QPen(QColor("black")));
+    int w = this->width();
+    int h = this->height();
+    for(int x = 0; x < 10; x++)
+        for(int y = 0; y < x; y++) {
+            painter.drawPoint(x-y-1, y);
+            painter.drawPoint(w-x+y, y);
+            painter.drawPoint(w-x+y, h-y-1);
+            painter.drawPoint(x-y-1, h-y-1);
+        }
 }
 
 NotesWindow::~NotesWindow()
