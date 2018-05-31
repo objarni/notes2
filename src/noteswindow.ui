@@ -25,6 +25,9 @@
        <string notr="true">background-color: rgb(255, 230, 200);
 font: 12pt &quot;Courier 10 Pitch&quot;;</string>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
      </widget>
     </item>
    </layout>

@@ -1,7 +1,9 @@
 #include "noteswindow.h"
+#include "noteswindow.h"
 #include "ui_noteswindow.h"
 
 #include <QDir>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QSettings>
 #include <QTextStream>
@@ -55,7 +57,7 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::CustomizeWindowHint);
 
     QSettings settings;
     restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
@@ -67,6 +69,12 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
 
+    ui->textEdit->setMouseTracking(true);
+}
+
+NotesWindow::~NotesWindow()
+{
+    delete ui;
 }
 
 void NotesWindow::changeEvent(QEvent *event)
@@ -84,15 +92,13 @@ void NotesWindow::changeEvent(QEvent *event)
     }
 }
 
-void NotesWindow::closeEvent(QCloseEvent *event) {
+void NotesWindow::closeEvent(QCloseEvent *) {
  QSettings settings;
  settings.setValue("mainWindowGeometry", saveGeometry());
 }
 
 void NotesWindow::paintEvent(QPaintEvent *)
 {
-//    static int i = 0;
-//    qInfo("paint %d", i++);
     QPainter painter(this);
     painter.setPen(QPen(QColor("black")));
     int w = this->width();
@@ -106,7 +112,24 @@ void NotesWindow::paintEvent(QPaintEvent *)
         }
 }
 
-NotesWindow::~NotesWindow()
+static QPoint globalStartPos;
+
+void NotesWindow::mousePressEvent(QMouseEvent *event)
 {
-    delete ui;
+    if(event->buttons() ==Qt::MiddleButton && event->type() == QEvent::MouseButtonPress)
+    {
+        globalStartPos = event->globalPos();
+    }
+}
+
+void NotesWindow::mouseMoveEvent(QMouseEvent *e)
+{
+    QPoint globalPos = e->globalPos();
+//    if(e->buttons() == Qt::MiddleButton) {
+    QPoint currentPos = pos();
+    QPoint delta = globalPos - globalStartPos;
+    this->move(currentPos + delta);
+        qInfo("move");
+    globalStartPos = globalPos;
+//    }
 }
