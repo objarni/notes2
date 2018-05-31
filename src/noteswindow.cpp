@@ -66,6 +66,22 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
 
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
+
+}
+
+void NotesWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::ActivationChange)
+    {
+        if(this->isActiveWindow())
+        {
+            this->setWindowOpacity(0.9);
+        }
+        else
+        {
+            this->setWindowOpacity(0.55);
+        }
+    }
 }
 
 void NotesWindow::closeEvent(QCloseEvent *event) {

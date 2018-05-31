@@ -15,6 +15,8 @@ public:
     ~NotesWindow();
     void closeEvent(QCloseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    void changeEvent(QEvent *event) override;
+
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
