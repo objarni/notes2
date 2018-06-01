@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QSettings>
 #include <QTextStream>
+#include <QScreen>
 
 namespace {
 void saveText(QString const & text, QString const & fullpath) {
@@ -55,17 +56,39 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
+    //this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
     this->setWindowFlags(Qt::WindowStaysOnTopHint);
 
     QSettings settings;
     restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
 
     auto textChangedSlot = [&]() {
-        saveText(ui->textEdit->toPlainText(), mNotes2File);
+        auto text = ui->textEdit->toPlainText();
+        saveText(text, mNotes2File);
     };
 
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
+
+    keyCtrl1 = new QShortcut(this);
+    keyCtrl1->setKey(Qt::CTRL + Qt::Key_1);
+    QObject::connect(keyCtrl1, &QShortcut::activated,
+                     this, &NotesWindow::moveWindowTopLeft);
+
+    keyCtrl2 = new QShortcut(this);
+    keyCtrl2->setKey(Qt::CTRL + Qt::Key_2);
+    QObject::connect(keyCtrl2, &QShortcut::activated,
+                     this, &NotesWindow::moveWindowTopRight);
+
+    keyCtrl3 = new QShortcut(this);
+    keyCtrl3->setKey(Qt::CTRL + Qt::Key_3);
+    QObject::connect(keyCtrl3, &QShortcut::activated,
+                     this, &NotesWindow::moveWindowBottomLeft);
+
+    keyCtrl4 = new QShortcut(this);
+    keyCtrl4->setKey(Qt::CTRL + Qt::Key_4);
+    QObject::connect(keyCtrl4, &QShortcut::activated,
+                     this, &NotesWindow::moveWindowBottomRight);
 
 }
 
@@ -84,15 +107,53 @@ void NotesWindow::changeEvent(QEvent *event)
     }
 }
 
-void NotesWindow::closeEvent(QCloseEvent *event) {
+int NotesWindow::desktopWidth() {
+    auto screen = QGuiApplication::primaryScreen();
+    auto screenGeometry = screen->geometry();
+    return screenGeometry.width();
+}
+
+int NotesWindow::desktopHeight() {
+    auto screen = QGuiApplication::primaryScreen();
+    auto screenGeometry = screen->geometry();
+    return screenGeometry.height();
+}
+
+int NotesWindow::windowWidth() {
+    return frameGeometry().width();
+}
+
+int NotesWindow::windowHalfHeight() {
+    return frameGeometry().height() / 2;
+}
+
+void NotesWindow::moveWindowTopLeft()
+{
+    move(0, windowHalfHeight());
+}
+
+void NotesWindow::moveWindowTopRight()
+{
+    move(desktopWidth() - windowWidth(), windowHalfHeight());
+}
+
+void NotesWindow::moveWindowBottomRight()
+{
+    move(desktopWidth() - windowWidth(), desktopHeight() - windowHalfHeight());
+}
+
+void NotesWindow::moveWindowBottomLeft()
+{
+    move(0, desktopHeight() - windowHalfHeight());
+}
+
+void NotesWindow::closeEvent(QCloseEvent *) {
  QSettings settings;
  settings.setValue("mainWindowGeometry", saveGeometry());
 }
 
 void NotesWindow::paintEvent(QPaintEvent *)
 {
-//    static int i = 0;
-//    qInfo("paint %d", i++);
     QPainter painter(this);
     painter.setPen(QPen(QColor("black")));
     int w = this->width();

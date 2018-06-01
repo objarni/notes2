@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QShortcut>
 
 namespace Ui {
 class NotesWindow;
@@ -17,7 +18,21 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void changeEvent(QEvent *event) override;
 
+    int desktopHeight();
+    int desktopWidth();
+    int windowWidth();
+    int windowHalfHeight();
+public slots:
+    void moveWindowBottomLeft();
+    void moveWindowBottomRight();
+    void moveWindowTopRight();
+    void moveWindowTopLeft();
+
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
+    QShortcut* keyCtrl2;
+    QShortcut* keyCtrl1;
+    QShortcut* keyCtrl3;
+    QShortcut* keyCtrl4;
 };
