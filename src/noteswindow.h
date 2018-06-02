@@ -22,6 +22,9 @@ public:
     int desktopWidth();
     int windowWidth();
     int windowHalfHeight();
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event);
+
 public slots:
     void moveWindowBottomLeft();
     void moveWindowBottomRight();
@@ -35,4 +38,6 @@ private:
     QShortcut* keyCtrl1;
     QShortcut* keyCtrl3;
     QShortcut* keyCtrl4;
+    int m_nMouseClick_X_Coordinate;
+    int m_nMouseClick_Y_Coordinate;
 };

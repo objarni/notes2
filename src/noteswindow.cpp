@@ -6,6 +6,7 @@
 #include <QSettings>
 #include <QTextStream>
 #include <QScreen>
+#include <QMouseEvent>
 
 namespace {
 void saveText(QString const & text, QString const & fullpath) {
@@ -56,8 +57,7 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
-    //this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
 
     QSettings settings;
     restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
@@ -171,3 +171,17 @@ NotesWindow::~NotesWindow()
 {
     delete ui;
 }
+
+void NotesWindow::mousePressEvent(QMouseEvent *event) {
+    m_nMouseClick_X_Coordinate = event->x();
+    m_nMouseClick_Y_Coordinate = event->y();
+}
+
+void NotesWindow::mouseMoveEvent(QMouseEvent *event) {
+    move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
+}
+
+
+
+
+

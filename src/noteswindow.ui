@@ -17,8 +17,23 @@
    <iconset resource="icon/icon.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
+  <property name="toolTip">
+   <string>Drag here to move window</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
     <item row="0" column="0">
      <widget class="QTextEdit" name="textEdit">
       <property name="styleSheet">
