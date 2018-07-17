@@ -57,7 +57,7 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     ui->setupUi(this);
     ui->textEdit->setText(loadText(mNotes2File));
 
-    this->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint);
 
     QSettings settings;
     restoreGeometry(settings.value("mainWindowGeometry").toByteArray());
@@ -154,6 +154,9 @@ void NotesWindow::closeEvent(QCloseEvent *) {
 
 void NotesWindow::paintEvent(QPaintEvent *)
 {
+    return;
+    // TODO: decide on ordinary window border or this
+    // decoration handles!
     QPainter painter(this);
     painter.setPen(QPen(QColor("black")));
     int w = this->width();
