@@ -98,7 +98,7 @@ void NotesWindow::changeEvent(QEvent *event)
     {
         if(this->isActiveWindow())
         {
-            this->setWindowOpacity(0.9);
+            this->setWindowOpacity(1);
         }
         else
         {
