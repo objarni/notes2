@@ -14,11 +14,14 @@
    <string>Notes 2</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="icon/icon.qrc">
-    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+   <iconset>
+    <normaloff>icon/icon.png</normaloff>icon/icon.png</iconset>
   </property>
   <property name="toolTip">
    <string>Drag here to move window</string>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -46,8 +49,6 @@ font: 12pt &quot;Courier 10 Pitch&quot;;</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="icon/icon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

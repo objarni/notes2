@@ -183,16 +183,6 @@ NotesWindow::~NotesWindow()
     delete ui;
 }
 
-void NotesWindow::mousePressEvent(QMouseEvent *event) {
-    m_nMouseClick_X_Coordinate = event->x();
-    m_nMouseClick_Y_Coordinate = event->y();
-}
-
-void NotesWindow::mouseMoveEvent(QMouseEvent *event) {
-    move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
-}
-
-
 
 
 
