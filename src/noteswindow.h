@@ -15,7 +15,6 @@ public:
     explicit NotesWindow(QString const & notes2File);
     ~NotesWindow();
     void closeEvent(QCloseEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
     void changeEvent(QEvent *event) override;
 
     int desktopHeight();
@@ -24,18 +23,10 @@ public:
     int windowHalfHeight();
 
 public slots:
-    void moveWindowBottomLeft();
-    void moveWindowBottomRight();
-    void moveWindowTopRight();
-    void moveWindowTopLeft();
     void insertCheckbox();
 
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
     QShortcut* keyCtrl0;
-    QShortcut* keyCtrl1;
-    QShortcut* keyCtrl2;
-    QShortcut* keyCtrl3;
-    QShortcut* keyCtrl4;
 };

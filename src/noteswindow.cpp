@@ -67,32 +67,6 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
 
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
-
-    keyCtrl1 = new QShortcut(this);
-    keyCtrl1->setKey(Qt::CTRL + Qt::Key_1);
-    QObject::connect(keyCtrl1, &QShortcut::activated,
-                     this, &NotesWindow::moveWindowTopLeft);
-
-    keyCtrl2 = new QShortcut(this);
-    keyCtrl2->setKey(Qt::CTRL + Qt::Key_2);
-    QObject::connect(keyCtrl2, &QShortcut::activated,
-                     this, &NotesWindow::moveWindowTopRight);
-
-    keyCtrl3 = new QShortcut(this);
-    keyCtrl3->setKey(Qt::CTRL + Qt::Key_3);
-    QObject::connect(keyCtrl3, &QShortcut::activated,
-                     this, &NotesWindow::moveWindowBottomLeft);
-
-    keyCtrl4 = new QShortcut(this);
-    keyCtrl4->setKey(Qt::CTRL + Qt::Key_4);
-    QObject::connect(keyCtrl4, &QShortcut::activated,
-                     this, &NotesWindow::moveWindowBottomRight);
-
-    keyCtrl0 = new QShortcut(this);
-    keyCtrl0->setKey(Qt::CTRL + Qt::Key_0);
-    QObject::connect(keyCtrl0, &QShortcut::activated,
-                     this, &NotesWindow::insertCheckbox);
-
 }
 
 void NotesWindow::changeEvent(QEvent *event)
@@ -130,26 +104,6 @@ int NotesWindow::windowHalfHeight() {
     return frameGeometry().height() / 2;
 }
 
-void NotesWindow::moveWindowTopLeft()
-{
-    move(0, windowHalfHeight());
-}
-
-void NotesWindow::moveWindowTopRight()
-{
-    move(desktopWidth() - windowWidth(), windowHalfHeight());
-}
-
-void NotesWindow::moveWindowBottomRight()
-{
-    move(desktopWidth() - windowWidth(), desktopHeight() - windowHalfHeight());
-}
-
-void NotesWindow::moveWindowBottomLeft()
-{
-    move(0, desktopHeight() - windowHalfHeight());
-}
-
 void NotesWindow::insertCheckbox()
 {
     ui->textEdit->insertPlainText("[ ] ");
@@ -158,24 +112,6 @@ void NotesWindow::insertCheckbox()
 void NotesWindow::closeEvent(QCloseEvent *) {
  QSettings settings;
  settings.setValue("mainWindowGeometry", saveGeometry());
-}
-
-void NotesWindow::paintEvent(QPaintEvent *)
-{
-    return;
-    // TODO: decide on ordinary window border or this
-    // decoration handles!
-    QPainter painter(this);
-    painter.setPen(QPen(QColor("black")));
-    int w = this->width();
-    int h = this->height();
-    for(int x = 0; x < 10; x++)
-        for(int y = 0; y < x; y++) {
-            painter.drawPoint(x-y-1, y);
-            painter.drawPoint(w-x+y, y);
-            painter.drawPoint(w-x+y, h-y-1);
-            painter.drawPoint(x-y-1, h-y-1);
-        }
 }
 
 NotesWindow::~NotesWindow()
