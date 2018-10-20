@@ -15,7 +15,6 @@ public:
     explicit NotesWindow(QString const & notes2File);
     ~NotesWindow();
     void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent *event) override;
 
 public slots:
     void insertCheckbox();

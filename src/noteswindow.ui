@@ -10,6 +10,14 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Lucida Console</family>
+    <pointsize>16</pointsize>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Notes 2</string>
   </property>
@@ -19,6 +27,12 @@
   </property>
   <property name="toolTip">
    <string>Drag here to move window</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -39,9 +53,30 @@
     </property>
     <item row="0" column="0">
      <widget class="QTextEdit" name="textEdit">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 230, 200);
-font: 12pt &quot;Courier 10 Pitch&quot;;</string>
+      <property name="palette">
+       <palette>
+        <active/>
+        <inactive/>
+        <disabled/>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <family>Lucida Console</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>IBeamCursor</cursorShape>
+      </property>
+      <property name="cursorWidth">
+       <number>3</number>
+      </property>
+      <property name="placeholderText">
+       <string>Type your notes here!</string>
       </property>
      </widget>
     </item>

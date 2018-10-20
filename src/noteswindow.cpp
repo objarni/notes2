@@ -69,21 +69,6 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
                      this, textChangedSlot);
 }
 
-void NotesWindow::changeEvent(QEvent *event)
-{
-    if (event->type() == QEvent::ActivationChange)
-    {
-        if(this->isActiveWindow())
-        {
-            this->setWindowOpacity(1);
-        }
-        else
-        {
-            this->setWindowOpacity(0.55);
-        }
-    }
-}
-
 void NotesWindow::insertCheckbox()
 {
     ui->textEdit->insertPlainText("[ ] ");
