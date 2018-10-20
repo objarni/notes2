@@ -22,8 +22,6 @@ void saveText(QString const & text, QString const & fullpath) {
     QTextStream outStream(&file);
     outStream << text;
     file.close();
-
-    qInfo("wrote - %s", qPrintable(text));
 }
 
 QString loadText(QString const & fullpath) {
