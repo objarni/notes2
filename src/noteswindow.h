@@ -30,12 +30,14 @@ public slots:
     void moveWindowBottomRight();
     void moveWindowTopRight();
     void moveWindowTopLeft();
+    void insertCheckbox();
 
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
-    QShortcut* keyCtrl2;
+    QShortcut* keyCtrl0;
     QShortcut* keyCtrl1;
+    QShortcut* keyCtrl2;
     QShortcut* keyCtrl3;
     QShortcut* keyCtrl4;
     int m_nMouseClick_X_Coordinate;

@@ -90,6 +90,11 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     QObject::connect(keyCtrl4, &QShortcut::activated,
                      this, &NotesWindow::moveWindowBottomRight);
 
+    keyCtrl0 = new QShortcut(this);
+    keyCtrl0->setKey(Qt::CTRL + Qt::Key_0);
+    QObject::connect(keyCtrl0, &QShortcut::activated,
+                     this, &NotesWindow::insertCheckbox);
+
 }
 
 void NotesWindow::changeEvent(QEvent *event)
@@ -145,6 +150,11 @@ void NotesWindow::moveWindowBottomRight()
 void NotesWindow::moveWindowBottomLeft()
 {
     move(0, desktopHeight() - windowHalfHeight());
+}
+
+void NotesWindow::insertCheckbox()
+{
+    ui->textEdit->insertPlainText("[ ] ");
 }
 
 void NotesWindow::closeEvent(QCloseEvent *) {
