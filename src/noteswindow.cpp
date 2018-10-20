@@ -84,26 +84,6 @@ void NotesWindow::changeEvent(QEvent *event)
     }
 }
 
-int NotesWindow::desktopWidth() {
-    auto screen = QGuiApplication::primaryScreen();
-    auto screenGeometry = screen->geometry();
-    return screenGeometry.width();
-}
-
-int NotesWindow::desktopHeight() {
-    auto screen = QGuiApplication::primaryScreen();
-    auto screenGeometry = screen->geometry();
-    return screenGeometry.height();
-}
-
-int NotesWindow::windowWidth() {
-    return frameGeometry().width();
-}
-
-int NotesWindow::windowHalfHeight() {
-    return frameGeometry().height() / 2;
-}
-
 void NotesWindow::insertCheckbox()
 {
     ui->textEdit->insertPlainText("[ ] ");
