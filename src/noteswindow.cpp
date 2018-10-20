@@ -67,6 +67,11 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
 
     QObject::connect(ui->textEdit, &QTextEdit::textChanged,
                      this, textChangedSlot);
+
+    keyCtrl0 = new QShortcut(this);
+    keyCtrl0->setKey(Qt::CTRL + Qt::Key_0);
+    QObject::connect(keyCtrl0, &QShortcut::activated,
+                     this, &NotesWindow::insertCheckbox);
 }
 
 void NotesWindow::insertCheckbox()
