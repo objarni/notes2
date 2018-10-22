@@ -18,9 +18,11 @@ public:
 
 public slots:
     void insertCheckbox();
+    void closeWindow();
 
 private:
     Ui::NotesWindow *ui;
     QString const & mNotes2File;
     QShortcut* keyCtrl0;
+    QShortcut* keyEsc;
 };

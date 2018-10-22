@@ -72,11 +72,21 @@ NotesWindow::NotesWindow(QString const & notes2FullPath) :
     keyCtrl0->setKey(Qt::CTRL + Qt::Key_0);
     QObject::connect(keyCtrl0, &QShortcut::activated,
                      this, &NotesWindow::insertCheckbox);
+
+    keyEsc = new QShortcut(this);
+    keyEsc->setKey(Qt::Key_Escape);
+    QObject::connect(keyEsc, &QShortcut::activated,
+                     this, &NotesWindow::closeWindow);
 }
 
 void NotesWindow::insertCheckbox()
 {
     ui->textEdit->insertPlainText("[ ] ");
+}
+
+void NotesWindow::closeWindow()
+{
+    this->close();
 }
 
 void NotesWindow::closeEvent(QCloseEvent *) {
