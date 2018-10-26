@@ -3,6 +3,8 @@
 #include <QDir>
 #include <QStandardPaths>
 
+#include "runguard.h"
+
 namespace {
 QString findNotes2FullPath() {
     auto docs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -14,6 +16,10 @@ QString findNotes2FullPath() {
 
 int main(int argc, char *argv[])
 {
+    RunGuard guard( "objarni/Notes2" );
+    if ( !guard.tryToRun() )
+        return 0;
+
     QApplication a(argc, argv);
     QCoreApplication::setOrganizationDomain("olofbjarnason.se");
     QCoreApplication::setOrganizationName("Objarni Productions AB");

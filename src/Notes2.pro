@@ -27,10 +27,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        noteswindow.cpp
+        noteswindow.cpp \
+    runguard.cpp
 
 HEADERS += \
-        noteswindow.h
+        noteswindow.h \
+    runguard.h
 
 FORMS += \
         noteswindow.ui
