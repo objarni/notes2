@@ -26,7 +26,7 @@
     <normaloff>icon/icon.png</normaloff>icon/icon.png</iconset>
   </property>
   <property name="toolTip">
-   <string>Drag here to move window</string>
+   <string/>
   </property>
   <property name="iconSize">
    <size>
